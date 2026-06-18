@@ -1,0 +1,43 @@
+#include <Servo.h>
+
+Servo servo;
+
+int LDR1 = A0;
+int LDR2 = A1;
+
+int Spoint = 90;      // Initial servo position
+int error = 10;       // Acceptable difference between LDR readings
+
+void setup() {
+  servo.attach(11);   // Servo connected to PWM pin 11
+  servo.write(Spoint);
+  delay(1000);
+}
+
+void loop() {
+
+  // Read light intensity from both LDR sensors
+  int ldr1 = analogRead(LDR1);
+  int ldr2 = analogRead(LDR2);
+
+  // Calculate the difference in light intensity
+  int difference = abs(ldr1 - ldr2);
+
+  // Move the servo only if the difference exceeds the error threshold
+  if (difference > error) {
+
+    if (ldr1 > ldr2) {
+      Spoint--;
+    }
+    else if (ldr1 < ldr2) {
+      Spoint++;
+    }
+
+    // Prevent the servo from moving beyond its physical limits
+    Spoint = constrain(Spoint, 0, 180);
+
+    servo.write(Spoint);
+  }
+
+  delay(80);
+}
