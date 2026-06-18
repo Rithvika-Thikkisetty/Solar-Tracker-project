@@ -1,2 +1,3 @@
 # Solar-Tracker-project
 Arduino-based solar tracking system that automatically aligns a solar panel toward the direction of maximum sunlight using LDR sensors and a servo motor.
+The system uses two LDR sensors placed on opposite sides of the solar panel to detect sunlight intensity. The Arduino continuously compares the sensor readings and determines the direction of maximum light. Based on the difference between the LDR values, a servo motor rotates the panel toward the brighter side. An error threshold is used to prevent unnecessary movements when both sensors receive nearly equal light, improving stability and reducing power consumption.
